@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanarata Literature Club - Where Words Come Alive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(2, 132, 199, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="books" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23ffffff" opacity="0.05" width="100" height="100"/><circle cx="50" cy="50" r="20" fill="%23ffffff" opacity="0.03"/></pattern></defs><rect fill="url(%23books)" width="1000" height="1000"/></svg>');
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0ea5e9;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        /* Featured Stories Grid */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .story-image {
+            height: 200px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '📖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+
+        .story-content {
+            padding: 1.5rem;
+        }
+
+        .story-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .story-author {
+            color: #0ea5e9;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .story-excerpt {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #0284c7;
+        }
+
+        /* Categories Section */
+        .categories {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Submission Form */
+        .submit-section {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(2, 132, 199, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">Tanarata Literature Club</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#stories">Publications</a></li>
+                    <li><a href="#categories">Genres</a></li>
+                    <li><a href="#submit">Submit Work</a></li>
+                    <li><a href="#about">About Club</a></li>
+                    <li><a href="#members">Members</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Tanarata Literature Club</h1>
+            <p>Where words come alive and creativity flourishes. Join our community of passionate writers, poets, and storytellers. Share your literary works, discover new voices, and celebrate the art of storytelling together.</p>
+            <a href="#stories" class="cta-button">Explore Our Publications</a>
+        </div>
+    </section>
+
+    <!-- Featured Stories -->
+    <section id="stories" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Publications</h2>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-image"></div>
+                    <div class="story-content">
+                        <h3 class="story-title">The Lighthouse Keeper's Tale</h3>
+                        <p class="story-author">by Sarah Mitchell</p>
+                        <p class="story-excerpt">Eleanor had been the keeper of Beacon Point Lighthouse for thirty-seven years, and in all that time, she had never seen a storm quite like the one brewing on the horizon...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-image"></div>
+                    <div class="story-content">
+                        <h3 class="story-title">The Secret Garden's Last Bloom</h3>
+                        <p class="story-author">by Elena Rosewood</p>
+                        <p class="story-excerpt">Maya discovered the hidden garden on a misty Tuesday morning, tucked behind the crumbling stone wall of her grandmother's estate. Overgrown with wild roses and forgotten dreams...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-image"></div>
+                    <div class="story-content">
+                        <h3 class="story-title">Ocean's Whisper</h3>
+                        <p class="story-author">by M. Rivers</p>
+                        <p class="story-excerpt">A poetic tale of the sea's ancient wisdom, where each wave carries secrets from depths unknown, and every tide brings forth whispered dreams of distant shores...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="section">
+        <div class="container">
+            <div class="categories">
+                <h2 class="section-title">Literary Genres</h2>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <span class="category-icon">🌟</span>
+                        <div class="category-name">Fantasy</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">❤️</span>
+                        <div class="category-name">Romance</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">🔍</span>
+                        <div class="category-name">Mystery</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">🚀</span>
+                        <div class="category-name">Sci-Fi</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">😊</span>
+                        <div class="category-name">Drama</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">📝</span>
+                        <div class="category-name">Poetry</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">📚</span>
+                        <div class="category-name">Essays</div>
+                    </div>
+                    <div class="category-card">
+                        <span class="category-icon">🌍</span>
+                        <div class="category-name">Cultural</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Story -->
+    <section id="submit" class="section">
+        <div class="container">
+            <div class="submit-section">
+                <h2 class="section-title">Submit Your Literary Work</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #64748b;">Share your creativity with the Tanarata Literature Club community. We welcome all forms of literary expression!</p>
+                
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="story-title">Work Title</label>
+                            <input type="text" id="story-title" name="title" placeholder="Enter the title of your literary work" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author-name">Author/Member Name</label>
+                            <input type="text" id="author-name" name="author" placeholder="Your name or pen name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author-email">Email Address</label>
+                            <input type="email" id="author-email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="story-category">Literary Genre</label>
+                            <select id="story-category" name="category" required>
+                                <option value="">Select a genre</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="romance">Romance</option>
+                                <option value="mystery">Mystery</option>
+                                <option value="sci-fi">Science Fiction</option>
+                                <option value="drama">Drama</option>
+                                <option value="poetry">Poetry</option>
+                                <option value="essays">Essays</option>
+                                <option value="cultural">Cultural Literature</option>
+                                <option value="memoir">Memoir</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="story-excerpt">Work Summary/Abstract</label>
+                            <textarea id="story-excerpt" name="excerpt" placeholder="Provide a compelling summary or abstract of your literary work..." required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="story-content">Complete Literary Work</label>
+                            <textarea id="story-content" name="content" placeholder="Share your complete literary work here - stories, poems, essays, etc..." required style="min-height: 300px;"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="author-bio">Author Bio (Optional)</label>
+                            <textarea id="author-bio" name="bio" placeholder="Tell us a bit about yourself as a writer..." style="min-height: 100px;"></textarea>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="submit-button">Submit to Tanarata Literature Club</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Club</a>
+                <a href="#guidelines">Submission Guidelines</a>
+                <a href="#membership">Join Club</a>
+            </div>
+            <p>&copy; 2024 Tanarata Literature Club. All rights reserved. | Celebrating literary excellence and creativity.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your submission to Tanarata Literature Club! Our editorial team will review your work and contact you soon.');
+            this.reset();
+        });
+
+        // Category card interactions
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const categoryName = this.querySelector('.category-name').textContent;
+                alert(`Browsing ${categoryName} stories...`);
+            });
+        });
+    </script>
+</body>
+</html>
